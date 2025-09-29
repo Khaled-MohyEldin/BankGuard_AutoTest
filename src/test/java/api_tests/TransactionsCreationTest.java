@@ -128,7 +128,7 @@ public class TransactionsCreationTest {
         rs.next(); 
         double balanceBefore = rs.getDouble("balance");
         
-        //execute tranastion 
+        //2- execute tranastion 
         Response res = TransEP.createTranaction(transPayload);
         System.out.println(res.asPrettyString());
         Assert.assertEquals(res.getStatusCode(), 201);
@@ -147,6 +147,7 @@ public class TransactionsCreationTest {
     @Test
     public void createTransferTransction(ITestContext context) throws SQLException {
 
+
         transPayload.setFromAccountId(1);
         transPayload.setToAccountId(2);
         transPayload.setAmount( 99.00);
@@ -161,7 +162,7 @@ public class TransactionsCreationTest {
         double balanceFromBefore = rs1.getDouble("balance");
         double balanceToBefore = rs2.getDouble("balance");
         
-        //execute tranastion 
+        //2- execute tranastion 
         Response res = TransEP.createTranaction(transPayload);
         System.out.println(res.asPrettyString());
         Assert.assertEquals(res.getStatusCode(), 201);

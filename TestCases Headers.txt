@@ -1,0 +1,72 @@
+Banking API Test Cases: 
+
+Modules (Users, Accounts, Transactions)
+
+##Valid Users TCs
+001- create user with valid data
+002- get all users 
+003- get user by id 
+004- get user by name 
+005- update user with valid NEW data
+    note : user can be updated with same data 
+        to say it's ok or not we refer to SRS
+006- delete user with valid ID 
+
+##inValid Users TCs 
+007- create user with Duplicate/Existing data 
+007- create user with empty Data 
+008- get user with invalid ID (deleted one or not created)
+009- get user with invalid Name
+010- update user with invalid id 
+011- delete user with invalid id 
+
+##Valid Accounts TCs
+012- create SAVINGS account with valid userID
+013- create CHECKING account with valid userID
+014- create CREDIT account with valid userID
+015- get all accounts 
+016- get account By account ID 
+017- get account by account Number
+018- get User's accounts by user ID 
+019- update account with valid AccID
+020- delete account with valid AccID
+
+##inValid Accounts TCs
+022- create account with empty data 
+    create account with invalid data 
+    get account with invalid account ID (deleted one or not created)
+    get account with invalid account Number (deleted one or not created)
+    update account with valid Data but invalid AccID (deleted one or not created)
+    update account with inValid Data but valid AccID
+    delete account with invalid AccID (deleted one or not created)
+
+##Valid Transactions TCs
+000- create Deposite Transaction in Valid account    
+     create Withdrawal Transaction in Valid account  
+     create Payment Transaction in Valid account  
+     create Transfer Transaction in Valid account  
+    get all Transactions
+    get tranactions by tranaction ID 
+    get tranactions by tranaction reference 
+    get tranactions by Account ID 
+
+##inValid Transactions TCs
+    all with valid body but from account does not have sufficient funds
+000-    create Deposite Transaction with insufficient funds 
+        create Withdrawal Transaction with insufficient funds 
+        create Payment Transaction with insufficient funds 
+        create Transfer Transaction with insufficient funds
+
+    create [Deposite/Withdrawal/Payment] Transaction with invalid AccID
+    create Transfer Transaction with invalid FROM ACCOUNT
+    create Transfer Transaction with invalid TO ACCOUNT
+    suggestion 
+        user should not be able to create any tranaction in accounts 
+        that have status INACTIVE or FROZEN or CLOSED;
+
+    get tranactions by invalid tranaction ID 
+    get tranactions by invalid tranaction reference  
+    get tranactions by invalid Account ID
+ 
+
+
