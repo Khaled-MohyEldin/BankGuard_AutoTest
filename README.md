@@ -26,20 +26,11 @@ BankGuard_AutoTest is a lightweight yet scalable automation framework built to v
 
 ## 📁 Project Structure
 
-BankGuard_AutoTest/
-├── src/
-│   ├── main/
-│   │   └── java/
-│   │       └── core/         # Core utilities and base classes
-│   └── test/
-│       └── java/
-│           └── tests/        # API and DB test cases
-├── pom.xml                   # Maven configuration
-├── testng.xml                # TestNG suite config
-└── README.md                 # Project documentation
+<img width="646" height="265" alt="image" src="https://github.com/user-attachments/assets/741c9f2f-a3ac-4a9a-8e94-c87fe4097c0c" />
+
 
 ## 🧭 Getting Started
-0. get Test target from awesome friend Shady
+1. get Test target from awesome friend Shady  
    `git clone https://github.com/Shady1997/-Mobile_Bank_API_RestFul`
 
 2. Clone the repo  
