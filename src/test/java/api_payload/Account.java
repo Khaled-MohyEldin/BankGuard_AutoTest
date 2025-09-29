@@ -1,8 +1,7 @@
 package api_payload;
 
-import java.math.BigDecimal;
-import api_payload.Enums.AccountType;
 import api_payload.Enums.AccStatus;
+import api_payload.Enums.AccountType;
 import lombok.Data;
 
 @Data

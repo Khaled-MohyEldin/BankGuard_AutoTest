@@ -1,40 +1,24 @@
 package api_tests;
 
 import api_endpoints.AccEP;
-import api_endpoints.Routes;
-import api_endpoints.UserEP;
 import api_payload.Account;
-import api_payload.User;
-import api_utils.DB;
-import api_payload.User;
-import api_payload.Account;
-import api_payload.Enums.AccountType;
 import api_payload.Enums.AccStatus;
+import api_payload.Enums.AccountType;
+import api_utils.DB;
 import com.github.javafaker.Faker;
-import com.sun.tools.jconsole.JConsoleContext;
-
 import io.restassured.module.jsv.JsonSchemaValidator;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
-import io.restassured.response.ValidatableResponseOptions;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.List;
-import java.util.Properties;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.sql.*;
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.lessThan;
 
 public class AccountsTest {
     Faker faker;

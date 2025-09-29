@@ -24,6 +24,9 @@ Modules (Users, Accounts, Transactions)
 012- create SAVINGS account with valid userID
 013- create CHECKING account with valid userID
 014- create CREDIT account with valid userID
+    suggestion
+        all newly created accounts should have status active 
+        only while updating you can change thier status, even from frozen to active again
 015- get all accounts 
 016- get account By account ID 
 017- get account by account Number

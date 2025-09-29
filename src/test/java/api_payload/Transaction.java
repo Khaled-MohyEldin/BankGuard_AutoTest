@@ -1,8 +1,8 @@
 package api_payload;
 
 
-import api_payload.Enums.TransType;
 import api_payload.Enums.TransStatus;
+import api_payload.Enums.TransType;
 import lombok.Data;
 
 @Data
