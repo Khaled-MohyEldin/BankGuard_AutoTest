@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "multipleOf": 1,
+      "minimum": 1
+    },
+    "accountNumber": {
+      "type": "string"
+    },
+    "accountType": {
+      "type": "string", 
+      "enum": ["SAVINGS", "CHECKING", "CREDIT"]
+    },
+    "balance": {
+      "type": "number"
+    },
+    "creditLimit": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["ACTIVE", "INACTIVE", "FROZEN", "CLOSED"]
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "accountNumber",
+    "accountType",
+    "balance",
+    "creditLimit",
+    "status",
+    "createdAt",
+    "updatedAt"
+  ]
+}

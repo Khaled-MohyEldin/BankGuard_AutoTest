@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "array",
+  "properties": {
+    "id": {
+      "type": "number"
+    },
+    "transactionReference": {
+      "type": "string"
+    },
+    "fromAccount": {
+      "$ref": "SchemaTransaction.json"
+    },
+    "toAccount": {
+      "$ref": "SchemaTransaction.json"
+    },
+    "amount": {
+      "type": "number",
+      "minimum": 0.01
+    },
+    "transactionType": {
+      "type": "string",
+      "enum": ["DEPOSIT", "WITHDRAWAL", "TRANSFER", "PAYMENT"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["PENDING", "COMPLETED", "FAILED", "CANCELLED"]
+    },
+    "description": {
+      "type": "string"
+    },
+    "fee": {
+      "type": "number"
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "processedAt": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "transactionReference",
+    "fromAccount",
+    "amount",
+    "transactionType"
+  ]
+}

@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="MyTestSuite" verbose="1" >
+
+<!--    <parameter name="url" value="value of url"/>-->
+
+<!--    <listeners>-->
+<!--        <listener class-name="TestComp.Listeners" />-->
+<!--    </listeners>-->
+
+    <test name="Test1">
+        <classes>
+            <class name="api_test.UserTest"/>
+        </classes>
+    </test>
+</suite>
