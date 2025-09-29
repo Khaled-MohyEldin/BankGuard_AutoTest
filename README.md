@@ -44,6 +44,9 @@ BankGuard_AutoTest is a lightweight yet scalable automation framework built to v
 
 5. Run tests  
    Use TestNG or Maven commands to execute the suite.
+   
+7. Finally all 50 testCases are in a file within project Not all implemented yet
+   just titles without boilerplate details
 
 ## 📌 Future Enhancements
 
