@@ -3,16 +3,12 @@ package api_tests;
 import api_endpoints.TransEP;
 import api_payload.Enums.TransType;
 import api_payload.Transaction;
-
-import com.github.javafaker.Faker;
-
-import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TransactionTestInvalid {
+public class TransactionTestNegative {
     Transaction transPayload;
     String msg;
 

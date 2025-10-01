@@ -18,6 +18,9 @@ Modules (Users, Accounts, Transactions)
 008- get user with invalid ID (deleted one or not created)
 009- get user with invalid Name
 010- update user with invalid id (deleted one or not created)
+010- updated/create user without username
+010- updated/create user without Email
+010- updated/create user without Password
 011- delete user with invalid id (deleted one or not created)   
     suggestions 
         deleting user should only be allowed when he deleted his accounts 
@@ -83,6 +86,10 @@ Modules (Users, Accounts, Transactions)
  Bugs found: 
 
  001-   cannot get user by userName
+ 001-   User can be updated with null phoneNumber
+        user can be created with an exiting password 
+        user can be created with an exiting fullname  
+        user can be created with a null phone# 
         Account can be created with status INACTIVE or FROZEN or CLOSED;
         transfer Transaction can be done with same account deducting fee
         any transaction can be done with accounts that have status INACTIVE or FROZEN or CLOSED;

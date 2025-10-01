@@ -1,16 +1,12 @@
 package api_tests;
 
 import api_endpoints.TransEP;
-import api_payload.Transaction;
-import com.github.javafaker.Faker;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TransactionsReadingTest {
-    Faker faker;
-    int userId, transId;
 
     @Test
     public void readAllTranactions() {
