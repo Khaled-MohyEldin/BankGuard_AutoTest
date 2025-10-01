@@ -71,6 +71,7 @@ Modules (Users, Accounts, Transactions)
         create Transfer Transaction with insufficient funds
 
     create [Deposite/Withdrawal/Payment] Transaction with invalid AccID
+    create [Deposite/Withdrawal/Payment] Transaction with negative amount
     create Transfer Transaction with invalid FROM ACCOUNT
     create Transfer Transaction with invalid TO ACCOUNT
     create Transfer Transaction with same account From and to 
@@ -90,6 +91,7 @@ Modules (Users, Accounts, Transactions)
         user can be created with an exiting password 
         user can be created with an exiting fullname  
         user can be created with a null phone# 
+        user with active accounts can be deleted and his accounts
         Account can be created with status INACTIVE or FROZEN or CLOSED;
         transfer Transaction can be done with same account deducting fee
         any transaction can be done with accounts that have status INACTIVE or FROZEN or CLOSED;
@@ -98,3 +100,4 @@ Modules (Users, Accounts, Transactions)
         Account can be updated with empty/Null Account Status 
         Account can be updated with empty Balance (set to zero)
         Account can be updated with empty CreditLimit (set to zero)
+        Transactions can be created with negative fee value

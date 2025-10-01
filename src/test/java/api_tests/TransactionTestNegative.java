@@ -99,4 +99,20 @@ public class TransactionTestNegative {
         Assert.assertTrue(msg.contains("Transaction not found with reference: TXN-4984C"));
     }
 
+    // 7- get Tranasction by invalid Tranaction Reference
+    @Test
+    public void createanyTranactionWithNegativeAmountOrFee() {
+        
+        transPayload.setFromAccountId(11);
+        transPayload.setTransactionType(TransType.WITHDRAWAL);
+        transPayload.setDescription("Transfer");
+        transPayload.setAmount(-98.50);
+        
+        Response res = TransEP.createTransaction(transPayload);
+        System.out.println(res.asPrettyString());
+
+        String msg = res.path("amount");
+        Assert.assertTrue(msg.equals("Amount must be greater than 0"));
+    }
+
 }

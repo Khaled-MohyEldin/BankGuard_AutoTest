@@ -9,7 +9,6 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.sql.ResultSet;
@@ -96,21 +95,30 @@ public class UsersTest {
     @Test
     public void deleteUser() throws SQLException {
         // API side
+        userId = 5; 
         Response res = UserEP.deleteUser(userId);
         Assert.assertEquals(res.getStatusCode(), 204);
 
-        // DB Side
+        //1- check user is deleted 
         ResultSet rs = DB.executeQuery("SELECT * FROM USERS WHERE ID = ?", userId);
         if (!rs.isBeforeFirst())
             System.out.println("results are empty");
         // asserting that results is empty (no record of that user)
         Assert.assertTrue(!rs.isBeforeFirst());
 
-        // second way 
+        //1- check user is deleted another way
         int rowsDeleted = DB.executeUpdate("DELETE FROM USERS WHERE ID = ?", userId);
         assertThat("Row should already be deleted by API",
                 rowsDeleted, equalTo(0)); // expect 0 since API already removed it
+
+        //2- check his accounts are deleted 
+        int rowsDeleted2 = DB.executeUpdate("DELETE FROM ACCOUNTS WHERE USER_ID = ?", userId);
+        assertThat("Row should already be deleted by API",
+                rowsDeleted2, equalTo(0)); // expect 0 since API already removed it
+        
     }
+
+
 
 
 }
