@@ -8,33 +8,35 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
-public class TranactionTestInvalid {
+public class TransactionTestInvalid {
     Faker faker;
     Transaction  transPayload;
     int userId, transId;
     String msg; 
 
-    @BeforeClass
-    public void setup(ITestContext context) {
-        faker = new Faker();
-        transPayload = new Transaction();
-        
-        transPayload.setFromAccountId(0);
-        transPayload.setAmount( 100.00);
-        transPayload.setTransactionType(TransType.TRANSFER);
-        transPayload.setDescription("ATM withdrawal");
-        transPayload.setFee( 1.50);
-    }
+     @BeforeMethod
+     public void setup() {
+         faker = new Faker();
+         transPayload = new Transaction();
+         transPayload.setAmount( 100.00);
+         transPayload.setTransactionType(TransType.TRANSFER);
+         transPayload.setDescription("ATM withdrawal");
+         transPayload.setFee(1.50);
+     }
 
-    //1- create Tranaction without invalid AccountID
+
+    //1- create Tranaction with invalid AccountID
     @Test
     public void createTransWithoutTrandID() throws SQLException {
 
-        Response res = TransEP.createTranaction(transPayload);
+        transPayload.setFromAccountId(100);
+//        transPayload.setToAccountId(2);
+        Response res = TransEP.createTransaction(transPayload);
         System.out.println(res.asPrettyString());
         Assert.assertEquals(res.getStatusCode(), 404);
 
@@ -46,9 +48,10 @@ public class TranactionTestInvalid {
     //2-Account has insufficient funds or  zero 
     @Test
     public void createWithdrawTranactionWithFunds() throws SQLException {
-        //adding this part of payload 
+        //adding this part of payload
         transPayload.setFromAccountId(1);
-        Response res = TransEP.createTranaction(transPayload);
+        transPayload.setToAccountId(2);
+        Response res = TransEP.createTransaction(transPayload);
         System.out.println(res.asPrettyString());
         Assert.assertEquals(res.getStatusCode(), 400);
 

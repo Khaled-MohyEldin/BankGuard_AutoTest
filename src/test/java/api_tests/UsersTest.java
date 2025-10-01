@@ -8,6 +8,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.ITestContext;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -22,7 +23,7 @@ public class UsersTest {
     User userPayload;
     int userId;
 
-    @BeforeTest
+    @BeforeClass
     public void setup(ITestContext context) {
         faker = new Faker();
         userPayload = new User();

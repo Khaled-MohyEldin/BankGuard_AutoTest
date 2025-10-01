@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 
 public class TransactionsReadingTest {
     Faker faker;
-    Transaction transPayload;
     int userId, transId;
 
     @Test

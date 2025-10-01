@@ -10,6 +10,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.ITestContext;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -26,7 +27,7 @@ public class AccountsTest {
     int AccId, userId;
     String accNum;
 
-    @BeforeTest
+    @BeforeClass
     public void setup(ITestContext context) {
         faker = new Faker();
         accPayload = new Account();
@@ -126,7 +127,7 @@ public class AccountsTest {
     }
 
     @Test
-    public void updateUser() throws SQLException {
+    public void updateAccount() throws SQLException {
         
         // get result set before update
         ResultSet rsBefore = DB.executeQuery("SELECT * FROM ACCOUNTS WHERE ID = ?", 6);

@@ -8,7 +8,16 @@ import static io.restassured.RestAssured.given;
 
 public class TransEP {
 
-    public static Response createTranaction(Transaction payload) {
+    public static Response createTransaction2(String payload) {
+        return given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(payload)
+                .when().post(Routes.trans_post_url)
+                .then().extract().response();
+    }
+
+    public static Response createTransaction(Transaction payload) {
         return given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)

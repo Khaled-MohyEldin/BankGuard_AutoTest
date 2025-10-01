@@ -6,10 +6,14 @@
 <!--    <listeners>-->
 <!--        <listener class-name="TestComp.Listeners" />-->
 <!--    </listeners>-->
-
+    <!-- <groups>
+      <run>
+        <include name="invalid"/>
+      </run>
+    </groups> -->
     <test name="Test1">
         <classes>
-            <class name="api_test.UserTest"/>
+            <!-- <class name="api_tests.TransactionTestInvalid"/> -->
         </classes>
     </test>
 </suite>

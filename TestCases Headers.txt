@@ -17,8 +17,10 @@ Modules (Users, Accounts, Transactions)
 007- create user with empty Data 
 008- get user with invalid ID (deleted one or not created)
 009- get user with invalid Name
-010- update user with invalid id 
-011- delete user with invalid id 
+010- update user with invalid id (deleted one or not created)
+011- delete user with invalid id (deleted one or not created)   
+    suggestions 
+        deleting user should only be allowed when he deleted his accounts 
 
 ##Valid Accounts TCs
 012- create SAVINGS account with valid userID
@@ -63,6 +65,7 @@ Modules (Users, Accounts, Transactions)
     create [Deposite/Withdrawal/Payment] Transaction with invalid AccID
     create Transfer Transaction with invalid FROM ACCOUNT
     create Transfer Transaction with invalid TO ACCOUNT
+    create Transfer Transaction with same account From and to 
     suggestion 
         user should not be able to create any tranaction in accounts 
         that have status INACTIVE or FROZEN or CLOSED;

@@ -120,7 +120,7 @@
       </dependency>
   </dependencies>
 
-    <profiles>
+    <!-- <profiles>
         <profile>
             <id>EndtoEnd</id>
             <build>
@@ -140,7 +140,7 @@
         </profile>
 
         <profile>
-            <id>DataDriven</id>
+            <id>groups</id>
             <build>
                 <plugins>
                     <plugin>
@@ -149,14 +149,14 @@
                         <version>3.3.0</version>
                         <configuration>
                             <suiteXmlFiles>
-                                <suiteXmlFile>DataTesting.xml</suiteXmlFile>
+                                <suiteXmlFile>testng.xml</suiteXmlFile>
                             </suiteXmlFiles>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-    </profiles>
+    </profiles> -->
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->

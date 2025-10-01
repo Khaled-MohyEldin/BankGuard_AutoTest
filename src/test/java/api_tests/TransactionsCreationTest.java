@@ -1,46 +1,48 @@
 package api_tests;
 
 import api_endpoints.TransEP;
+import api_endpoints.Routes;
 import api_payload.Enums.TransType;
 import api_payload.Transaction;
 import api_utils.DB;
 import com.github.javafaker.Faker;
+
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.ITestContext;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Test(groups = {"ValidTransCreation"})
 public class TransactionsCreationTest {
-    Faker faker;
     Transaction transPayload;
-    int userId, transId;
+    // int userId, transId;
+    double precisionDelta = 0.001; // Allows a difference up to $0.001
 
-    @BeforeClass
-    public void setup(ITestContext context) {
-        faker = new Faker();
+    @BeforeMethod
+    public void setup() {
         transPayload = new Transaction();
-        
-        transPayload.setFromAccountId(0);
-        transPayload.setAmount( 100.00);
-        transPayload.setTransactionType(TransType.TRANSFER);
-        transPayload.setDescription("ATM withdrawal");
+        transPayload.setFromAccountId(10);
+        transPayload.setToAccountId(3);
+        transPayload.setAmount( 98.50);
         transPayload.setFee( 1.50);
-    }
+   }
+
+   @AfterClass
+   public void tearDown(){ transPayload = null;}
+
 
     //there are 4 types of tranactions (DEPOSIT, WITHDRAWAL, PAYMENT, Transfer)
-    //first 3 share same payload, while the 4th (Transfer) needs additional field in his body 
     @Test
-    public void createWithdrawTransction(ITestContext context) throws SQLException {
-
-        transPayload.setFromAccountId(1);
-        transPayload.setAmount( 500.00);
+    public void createWithdrawTransction() throws SQLException {
+        // transPayload.setFromAccountId(2);
         transPayload.setTransactionType(TransType.WITHDRAWAL);
         transPayload.setDescription("ATM withdrawal");
-        transPayload.setFee( 0.0);
 
         //1- we get Balance from account with account ID
         ResultSet rs = DB.executeQuery("SELECT * FROM accounts WHERE ID = ?", transPayload.getFromAccountId());
@@ -48,12 +50,12 @@ public class TransactionsCreationTest {
         double balanceBefore = rs.getDouble("balance");
         
         //execute tranastion 
-        Response res = TransEP.createTranaction(transPayload);
+        Response res = TransEP.createTransaction(transPayload);
         System.out.println(res.asPrettyString());
-        Assert.assertEquals(res.getStatusCode(), 201);
+         Assert.assertEquals(res.getStatusCode(), 201);
         
         //3- get balance After and compare [after = before -amount -fee ]
-        ResultSet rs2 = DB.executeQuery("SELECT * FROM accounts WHERE ID = ?", transPayload.getFromAccountId());
+        ResultSet rs2 = DB.executeQuery("SELECT * FROM accounts WHERE ID = ?",transPayload.getFromAccountId());
         rs2.next(); 
         double balance2 = rs2.getDouble("balance");
         double balanceAfter = balanceBefore - (transPayload.getAmount() + transPayload.getFee()); 
@@ -66,12 +68,11 @@ public class TransactionsCreationTest {
     // just add amount to current balance of that account 
     @Test
     public void createDepositeTransction(ITestContext context) throws SQLException {
-
-        transPayload.setFromAccountId(1);
-        transPayload.setAmount( 100.00);
+        
+        transPayload.setFromAccountId(10);
         transPayload.setTransactionType(TransType.DEPOSIT);
         transPayload.setDescription("Whatever Deposite");
-        transPayload.setFee( 0.00);
+        System.out.println(transPayload.toString());
 
         //1- we get Balance from account with account ID
         ResultSet rs = DB.executeQuery("SELECT * FROM accounts WHERE ID = ?", transPayload.getFromAccountId());
@@ -79,7 +80,7 @@ public class TransactionsCreationTest {
         double balanceBefore = rs.getDouble("balance");
         
         //execute tranastion 
-        Response res = TransEP.createTranaction(transPayload);
+        Response res = TransEP.createTransaction(transPayload);
         System.out.println(res.asPrettyString());
         Assert.assertEquals(res.getStatusCode(), 201);
         
@@ -93,13 +94,11 @@ public class TransactionsCreationTest {
     }
 
     @Test
-    public void createPaymentTransction(ITestContext context) throws SQLException {
+    public void createPaymentTransction() throws SQLException {
 
-        transPayload.setFromAccountId(1);
-        transPayload.setAmount( 98.00);
+        transPayload.setFromAccountId(3);
         transPayload.setTransactionType(TransType.PAYMENT);
         transPayload.setDescription("paying for a service");
-        transPayload.setFee( 1.00);
 
         //1- we get Balance from account with account ID
         ResultSet rs = DB.executeQuery("SELECT * FROM accounts WHERE ID = ?", transPayload.getFromAccountId());
@@ -107,7 +106,7 @@ public class TransactionsCreationTest {
         double balanceBefore = rs.getDouble("balance");
         
         //2- execute tranastion 
-        Response res = TransEP.createTranaction(transPayload);
+         Response res = TransEP.createTransaction(transPayload);
         System.out.println(res.asPrettyString());
         Assert.assertEquals(res.getStatusCode(), 201);
         
@@ -123,15 +122,12 @@ public class TransactionsCreationTest {
     // in Transfer we add "ToAccountId" to payload 
     // then we check that two accounts balances updated correctly in DB
     @Test
-    public void createTransferTransction(ITestContext context) throws SQLException {
-
-
-        transPayload.setFromAccountId(1);
-        transPayload.setToAccountId(2);
-        transPayload.setAmount( 99.00);
+    public void createTransferTransction() throws SQLException {
+        transPayload.setFromAccountId(4);
+        transPayload.setToAccountId(3);
         transPayload.setTransactionType(TransType.TRANSFER);
         transPayload.setDescription("Transfer between accounts");
-        transPayload.setFee( 1.00);
+        
 
         //1- we get Balance from Two accounts (from - to) with account ID
         ResultSet rs1 = DB.executeQuery("SELECT * FROM accounts WHERE ID = ?", transPayload.getFromAccountId());
@@ -141,7 +137,7 @@ public class TransactionsCreationTest {
         double balanceToBefore = rs2.getDouble("balance");
         
         //2- execute tranastion 
-        Response res = TransEP.createTranaction(transPayload);
+        Response res = TransEP.createTransaction(transPayload);
         System.out.println(res.asPrettyString());
         Assert.assertEquals(res.getStatusCode(), 201);
         
@@ -151,12 +147,17 @@ public class TransactionsCreationTest {
         rs3.next(); rs4.next(); 
         double balance3 = rs3.getDouble("balance");
         double balance4 = rs4.getDouble("balance");
+
         double balanceFromAfter = balanceFromBefore - transPayload.getAmount() - transPayload.getFee(); 
         double balanceToAfter = balanceToBefore + transPayload.getAmount();
+
         System.out.println("FromAccount Before ="+ balanceFromBefore +" ,Expected ="+ balanceFromAfter + " ,Actual =" + balance3);
         System.out.println("ToAccount Before ="+ balanceToBefore +" ,Expected ="+ balanceToAfter + " ,Actual =" + balance4);
-        Assert.assertEquals(balance3, balanceFromAfter);
-        Assert.assertEquals(balance4, balanceToAfter);
+
+        Assert.assertEquals(balance3, balanceFromAfter, precisionDelta, 
+        "The calculated account balance does not match the database value.");
+        Assert.assertEquals(balance4, balanceToAfter, precisionDelta, 
+        "The calculated account balance does not match the database value.");
     }
 
 
