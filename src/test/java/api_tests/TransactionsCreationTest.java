@@ -33,9 +33,6 @@ public class TransactionsCreationTest {
         transPayload.setFee( 1.50);
    }
 
-   @AfterClass
-   public void tearDown(){ transPayload = null;}
-
 
     //there are 4 types of tranactions (DEPOSIT, WITHDRAWAL, PAYMENT, Transfer)
     @Test

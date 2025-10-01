@@ -37,10 +37,15 @@ Modules (Users, Accounts, Transactions)
 020- delete account with valid AccID
 
 ##inValid Accounts TCs
-022- create account with empty data 
+022-create account with empty data 
     create account with invalid data 
+    get account with invalid User ID (deleted one or not created)
     get account with invalid account ID (deleted one or not created)
     get account with invalid account Number (deleted one or not created)
+    update account with Same Data
+    update account with different user than created before (tested but you cannot) 
+    update account with empty account number (tested but you cannot) 
+    update account with empty account Type (BUG it can be done)
     update account with valid Data but invalid AccID (deleted one or not created)
     update account with inValid Data but valid AccID
     delete account with invalid AccID (deleted one or not created)
@@ -74,5 +79,15 @@ Modules (Users, Accounts, Transactions)
     get tranactions by invalid tranaction reference  
     get tranactions by invalid Account ID
  
+ ==================================
+ Bugs found: 
 
-
+ 001-   cannot get user by userName
+        Account can be created with status INACTIVE or FROZEN or CLOSED;
+        transfer Transaction can be done with same account deducting fee
+        any transaction can be done with accounts that have status INACTIVE or FROZEN or CLOSED;
+        Account can be updated with same Data as before 
+        Account can be created with empty/Null Account Status 
+        Account can be updated with empty/Null Account Status 
+        Account can be updated with empty Balance (set to zero)
+        Account can be updated with empty CreditLimit (set to zero)

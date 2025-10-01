@@ -11,7 +11,6 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.sql.ResultSet;
@@ -85,7 +84,7 @@ public class AccountsTest {
     }
 
     @Test
-    public void readAllUsers() {
+    public void readAllAccounts() {
         Response res = AccEP.getAllAccounts();
         System.out.println(res.asPrettyString());
         Assert.assertEquals(res.getStatusCode(), 200);
@@ -96,11 +95,12 @@ public class AccountsTest {
 
     @Test
     public void readAccountByID() {
-        Response res = AccEP.getAccByAccID(AccId);
+        Response res = AccEP.getAccByAccID(1);
+
         System.out.println(res.asPrettyString());
         Assert.assertEquals(res.getStatusCode(), 200);
 
-        // checking against schema
+        //checking against schema
         res.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("SchemaAccount.json"));
     }
 

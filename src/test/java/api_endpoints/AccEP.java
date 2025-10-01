@@ -20,7 +20,7 @@ public class AccEP {
 
     public static Response getAccByAccID(int id) {
         return given().pathParams("id", id)
-                .when().get(Routes.acc_getByUser_url)
+                .when().get(Routes.acc_get_url)
                 .then().extract().response();
     }
 

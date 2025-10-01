@@ -19,7 +19,7 @@ public class Routes {
     //Account Module
     public static String acc_post_url        = base + "/accounts";
     public static String acc_getAll_url      = base + "/accounts";
-    public static String acc_get_url         = base + "accounts/{id}";
+    public static String acc_get_url         = base + "/accounts/{id}";
     public static String acc_getByUser_url   = base + "/accounts/user/{userId}";
     public static String acc_getByAccNum_url = base + "/accounts/number/{accountNumber}";
     public static String acc_update_url      = base + "/accounts/{id}";
